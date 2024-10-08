@@ -1,24 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Header from './components/header.component'; 
+import Footer from './components/footer.component'; 
+import Home from './components/home.component'; 
+import SignIn from './components/login.component';
+import CssBaseline from '@mui/material/CssBaseline';
+import Box from '@mui/material/Box'; 
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#1976d2',
+    },
+    secondary: {
+      main: '#dc004e',
+    },
+  },
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <CssBaseline />
+        <Header />
+        <Box>
+          <Routes>
+            <Route path="/home" element={<Home />} />
+            <Route path="/login" element={<SignIn />} />
+          </Routes>
+        </Box>
+        <Footer />
+      </Router>
+    </ThemeProvider>
   );
 }
 
